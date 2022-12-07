@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Lovejoy Antique registration</title>
+
+</head>
+<body>
+<section>
+    <div class="container p-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header text-center fs-4">Register Page</div>
+                    <div class="card-body">
+                        <form action="#" th:action="@{/process_register}" th:object="${AppUser}" method="post" onsubmit="return validateForm()">
+                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                            <div class="mb-3">
+                                <label>Enter First Name</label> <input type="text"
+                                                                      name="firstName"
+                                                                       placeholder="First Name"
+                                                                       class="form-control"
+                                                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Enter Last Name</label> <input type="text"
+                                                                      placeholder="Last name"
+                                                                      name="lastName"
+                                                                      class="form-control"
+                                                                      required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Enter Email</label> <input type="text" name="email"
+                                                                  placeholder="Email"
+                                                                  class="form-control"
+                                                                  required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Enter Contact Telephone Number</label> <input type="text" name="teleNumber"
+                                                                                     placeholder="Telephone number"
+                                                                    class="form-control"
+                                                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Enter Password</label> <input type="password"
+                                                                     name="password"
+                                                                     placeholder="Password"
+                                                                     class="form-control"
+                                                                     required>
+                            </div>
+                            <button class="btn btn-primary col-md-12">Register</button>
+
+                            </br></br>
+
+                            <input type="hidden" th:if="${_csrf}!=null" th:value="${_csrf.token}" name="_csrf">
+
+                            <div class="g-recaptcha"  style="text-align:center" th:data-sitekey="${@environment.getProperty('recaptcha.key')}"></div>
+
+
+                            <div id="message">
+                                <h3>Password must contain the following:</h3>
+                                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                                <p id="number" class="invalid">A <b>number</b></p>
+                                <p id="special" class="invalid">A <b>special</b> <b>character</b></p>
+                                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<script type="text/javascript">
+    function validateForm(){
+        if(grecaptcha.getResponse()){
+            return true;
+        }
+        else{
+            alert("Please prove that you're not robot")
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

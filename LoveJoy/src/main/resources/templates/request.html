@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Request Evaluation</title>
+</head>
+<body>
+<div style="text-align: center;">
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <h1>Request Evaluation</h1>
+    <form action="#" th:action="@{/process_request}" method="post" th:object="${RequestDetails}"
+          enctype="multipart/form-data" onsubmit="return validateForm()">
+
+        <label for="contact">Contact Method</label>
+        <select id="contact" name="contact" required>
+            <option value="phone">Telephone</option>
+            <option value="email">Email</option>
+        </select>
+
+        <br/>
+        <br/>
+        <br/>
+
+        <label>Note:</label>
+        <textarea rows="25" cols="100" name="note" required placeholder="Only allow alphabetic character,Numeric digit. Special characters only allow
+'+', '-', 'space', '(', ')', '?', '!', '.', ':', ','"></textarea>
+
+        <br/>
+        <br/>
+        <label>Photos: </label>
+        <input type="file" name="image" accept="image/png, image/jpeg" required/>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <div class="g-recaptcha"  style="text-align:center" th:data-sitekey="${@environment.getProperty('recaptcha.key')}"></div>
+
+
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+        <button type="submit">Submit</button>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function validateForm(){
+        if(grecaptcha.getResponse()){
+            return true;
+        }
+        else{
+            alert("Please prove that you're not robot")
+            return false;
+        }
+    }
+</script>
+
+</body>
+</html>

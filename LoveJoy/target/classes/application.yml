@@ -1,0 +1,44 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+  datasource:
+    password:
+    url: jdbc:postgresql://localhost:5432/register
+    username:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: lovejoyantiqueuk@gmail.com
+    password: wawedbxjkeyvlwzi
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+recaptcha:
+  key: 6Lfd4R8jAAAAAC2bbuPILwVsh5_sp6nCTR1AQtc1
+  secret: 6Lfd4R8jAAAAAIEZNZ5NAHG6hE3SwU00F-544-za
+  url: https://www.google.com/recaptcha/api/siteverify

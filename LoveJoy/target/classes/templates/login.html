@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>LoveJoy Antique Login</title>
+
+</head>
+<body>
+
+<section>
+
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header text-center fs-4">Login Page</div>
+
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        Invalid username & Password</div>
+
+                    <div th:if="${param.error}">
+                        <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                    </div>
+
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        Logout Successfully</div>
+
+                    <div class="card-body">
+                        <form action="/login" method="post" id="login">
+
+                            <div class="mb-3">
+                                <label>Enter Email</label> <input type="text" name="email"
+                                                                  class="form-control">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label>Enter Password</label> <input type="password"
+                                                                     name="password" class="form-control">
+                            </div>
+
+                            <button class="btn btn-primary col-md-12"
+                                    data-action='submit'>Login</button>
+
+                            <a th:href="@{/forgot_password}">Forgot your password?</a>
+
+                            <input type="hidden" th:if="${_csrf}!=null" th:value="${_csrf.token}" name="_csrf">
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+</body>
+</html>
